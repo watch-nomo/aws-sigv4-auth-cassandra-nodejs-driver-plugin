@@ -1,5 +1,5 @@
 {
-  "name": "aws-sigv4-auth-cassandra-plugin",
+  "name": "@nomosmartcare/aws-sigv4-auth-cassandra-plugin",
   "version": "1.0.0",
   "description": "A sigv4 authentication plugin for open-source Datastax NodeJS Driver for Apache Cassandra",
   "main": "index.ts",
