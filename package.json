@@ -2,9 +2,20 @@
   "name": "@nomosmartcare/aws-sigv4-auth-cassandra-plugin",
   "version": "1.0.0",
   "description": "A sigv4 authentication plugin for open-source Datastax NodeJS Driver for Apache Cassandra",
-  "main": "index.ts",
-  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "tsc",
     "test": "tsx node_modules/.bin/mocha 'test/unit/**/*.ts' -R spec -t 5000",
     "build-jsdocs": "jsdoc -c ./jsdoc-config.json"
   },
@@ -32,12 +43,11 @@
     "mail": ""
   },
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 18.0.0"
   },
   "devDependencies": {
     "@smithy/types": "^4.14.0",
     "@types/chai": "^5.2.3",
-    "@types/crypto-js": "^4.2.2",
     "@types/node": "^25.5.2",
     "chai": "^6.2.2",
     "jsdoc": "^4.0.5",
@@ -49,6 +59,5 @@
   "dependencies": {
     "@aws-sdk/credential-providers": "^3.1025.0",
     "cassandra-driver": "^4.8.0",
-    "crypto-js": "^4.2.0"
   }
 }
