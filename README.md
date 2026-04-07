@@ -1,3 +1,7 @@
+# Nomo Note
+
+This is a fork of the original [aws-sigv4-auth-cassandra-plugin](https://github.com/aws/aws-sigv4-auth-cassandra-plugin) package rewritten in Typescript.
+
 # IMPORTANT: Latest Version
 
 The current version is 1.0.5. Please see the [changelog](./CHANGELOG.md) for details on version history.
