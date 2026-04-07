@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "prepublishOnly": "npm run build",
     "test": "tsx node_modules/.bin/mocha 'test/unit/**/*.ts' -R spec -t 5000",
     "build-jsdocs": "jsdoc -c ./jsdoc-config.json"
   },
