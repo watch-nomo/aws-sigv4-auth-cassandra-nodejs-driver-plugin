@@ -57,8 +57,10 @@
     "typescript": "^6.0.2",
     "tsx": "^4.21.0"
   },
+  "peerDependencies": {
+    "cassandra-driver": ">=4.0.0"
+  },
   "dependencies": {
-    "@aws-sdk/credential-providers": "^3.1025.0",
-    "cassandra-driver": "^4.8.0"
+    "@aws-sdk/credential-providers": "^3.1025.0"
   }
 }
