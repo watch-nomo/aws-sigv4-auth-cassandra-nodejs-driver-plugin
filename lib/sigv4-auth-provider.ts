@@ -150,7 +150,8 @@ export class SigV4Authenticator extends AuthenticatorBase {
     })
   }
 
-  onAuthenticationSuccess(token?: Buffer) {
-    console.log('not yet implmented')
+  onAuthenticationSuccess(_token?: Buffer) {
+    // No-op: SigV4 authentication is complete after evaluateChallenge.
+    // The server does not send a final token that requires processing.
   }
 }
