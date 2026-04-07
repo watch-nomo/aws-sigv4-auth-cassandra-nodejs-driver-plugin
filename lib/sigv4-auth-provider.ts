@@ -20,6 +20,16 @@ import { computeSigV4SignatureCassandraRequest } from './sigv4-auth-signature'
 import { fromNodeProviderChain } from '@aws-sdk/credential-providers'
 import { AwsCredentialIdentityProvider } from '@smithy/types'
 
+// The cassandra-driver type definitions declare AuthProvider and Authenticator
+// as interfaces, but at runtime they are constructor functions. We need to
+// extend them (not just implement) so that instanceof checks in the driver pass.
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { AuthProvider: AuthProviderBase, Authenticator: AuthenticatorBase } =
+  require('cassandra-driver/lib/auth/provider') as {
+    AuthProvider: new () => auth.AuthProvider
+    Authenticator: new () => auth.Authenticator
+  }
+
 /**
  * Creates a new instance of the Authenticator provider.
  *
@@ -34,7 +44,7 @@ import { AwsCredentialIdentityProvider } from '@smithy/types'
  * @constructor
  */
 
-export class SigV4AuthProvider implements cass.auth.AuthProvider {
+export class SigV4AuthProvider extends AuthProviderBase {
   region: string
   chain: AwsCredentialIdentityProvider
   constructor(credentials?: {
@@ -43,6 +53,7 @@ export class SigV4AuthProvider implements cass.auth.AuthProvider {
     secretAccessKey?: string
     sessionToken?: string
   }) {
+    super()
     const accessKeyId = credentials?.accessKeyId
     const secretAccessKey = credentials?.secretAccessKey
     this.chain =
@@ -100,11 +111,12 @@ export class SigV4AuthProvider implements cass.auth.AuthProvider {
  * @constructor
  */
 
-export class SigV4Authenticator implements cass.auth.Authenticator {
+export class SigV4Authenticator extends AuthenticatorBase {
   region: string
   chain: AwsCredentialIdentityProvider
   date?: Date
   constructor({ region, chain, date }: { region: string; chain: AwsCredentialIdentityProvider; date?: Date }) {
+    super()
     this.region = region
     this.chain = chain
     this.date = date
